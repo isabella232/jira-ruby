@@ -344,6 +344,9 @@ module JIRA
     def save!(attrs, path = nil)
       path ||= new_record? ? url : patched_url
       http_method = new_record? ? :post : :put
+      if path =~ /issue\/.+?\/transitions/
+        http_method = :post
+      end
       response = client.send(http_method, path, attrs.to_json)
       set_attrs(attrs, false)
       set_attrs_from_response(response)
