@@ -34,9 +34,7 @@ module JIRA
         fields.each do |f|
           next unless f.custom
           name = if field_map.key? f.name
-                   renamed = safer_name(f.name, f.id)
-                   warn "Duplicate Field name #{f.name} #{f.id} - renaming as #{renamed}"
-                   renamed
+                   safer_name(f.name, f.id)
                  else
                    safe_name(f.name)
           end
