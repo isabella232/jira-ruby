@@ -70,7 +70,7 @@ module JIRA
       def project
         response = client.get(path_base(client) + "/board/#{id}/project")
         json = self.class.parse_json(response.body)
-        json['values'][0]
+        client.Project.find(json['values'][0]['id'])
       end
 
       def add_issue_to_backlog(issue)
